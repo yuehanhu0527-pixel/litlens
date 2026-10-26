@@ -1,6 +1,16 @@
+import os
+
 from app.hybrid_retrieval import hybrid_search
-from app.reranker import rerank_chunks
 from app.evidence_utils import make_evidence_id
+
+
+ENABLE_RERANKER = (
+    os.getenv(
+        "ENABLE_RERANKER",
+        "true"
+    ).lower()
+    == "true"
+)
 
 
 def retrieve_evidence(
@@ -11,24 +21,34 @@ def retrieve_evidence(
 ) -> list[dict]:
 
     candidates = hybrid_search(
-    query=query,
-    top_k=candidate_k,
-    candidate_k=candidate_k,
-    document_ids=document_ids
-)
-
-    results = rerank_chunks(
         query=query,
-        chunks=candidates,
-        top_k=top_k
+        top_k=candidate_k,
+        candidate_k=candidate_k,
+        document_ids=document_ids
     )
+
+    if ENABLE_RERANKER:
+
+        from app.reranker import rerank_chunks
+
+        results = rerank_chunks(
+            query=query,
+            chunks=candidates,
+            top_k=top_k
+        )
+
+    else:
+
+        results = candidates[:top_k]
 
     final_results = []
 
     for chunk in results:
         final_results.append({
             **chunk,
-            "evidence_id": make_evidence_id(chunk)
+            "evidence_id": make_evidence_id(
+                chunk
+            )
         })
 
     return final_results
