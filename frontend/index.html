@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LitLens</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+
+<body>
+  <div class="page-shell">
+
+    <aside class="sidebar">
+
+      <div class="brand">
+
+        <div class="brand-mark">
+          ❧
+        </div>
+
+        <div>
+          <div class="brand-name">
+            LitLens
+          </div>
+
+          <div class="brand-subtitle">
+            Evidence-Grounded<br />
+            Reading Companion
+          </div>
+        </div>
+
+      </div>
+
+
+      <nav class="nav">
+
+        <button
+          class="nav-item"
+          data-mode="ask"
+        >
+          <span class="nav-icon">
+            ◌
+          </span>
+
+          <span>
+            Ask
+          </span>
+        </button>
+
+
+        <button
+          class="nav-item"
+          data-mode="verify"
+        >
+          <span class="nav-icon">
+            ◇
+          </span>
+
+          <span>
+            Verify
+          </span>
+        </button>
+
+
+        <button
+          class="nav-item active"
+          data-mode="explore"
+        >
+          <span class="nav-icon">
+            ✧
+          </span>
+
+          <span>
+            Explore
+          </span>
+        </button>
+
+      </nav>
+
+
+      <div class="sidebar-divider"></div>
+
+
+      <div class="sidebar-note">
+
+        <div class="quote">
+          “A more thoughtful way to read research.”
+        </div>
+
+        <div class="books">
+          ▥ ▥ ▥
+        </div>
+
+      </div>
+
+    </aside>
+
+
+    <main class="workspace">
+
+      <header class="topbar">
+
+        <div class="heading">
+
+          <h1>
+            LitLens
+          </h1>
+
+          <span>
+            Evidence-Grounded Reading Companion
+          </span>
+
+        </div>
+
+
+        <div class="topbar-actions">
+
+          <label class="search-box">
+
+            <span>
+              ⌕
+            </span>
+
+            <input
+              id="paper-search"
+              type="search"
+              placeholder="Search your papers..."
+            />
+
+          </label>
+
+
+          <button
+            id="refresh-docs"
+            class="icon-btn"
+            title="Refresh documents"
+          >
+            ↻
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <div class="content-grid">
+
+        <!-- LEFT COLUMN -->
+        <section class="left-column">
+
+
+          <!-- UPLOAD -->
+          <div
+            id="upload-card"
+            class="card upload-card"
+          >
+
+            <div class="card-title-row">
+
+              <div class="soft-icon">
+                ▧
+              </div>
+
+              <div>
+
+                <h2>
+                  Upload a Research Paper
+                </h2>
+
+                <p>
+                  Add PDFs to your library and start exploring the evidence.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <label
+              id="drop-zone"
+              class="drop-zone"
+              for="pdf-input"
+            >
+
+              <div class="drop-icon">
+                ⇧
+              </div>
+
+              <div class="drop-title">
+                Drag and drop a PDF here
+              </div>
+
+              <div class="drop-or">
+                or
+              </div>
+
+              <span class="primary-btn fake-btn">
+                Upload PDF
+              </span>
+
+              <div class="helper-text">
+                PDF files only
+              </div>
+
+            </label>
+
+
+            <input
+              id="pdf-input"
+              type="file"
+              accept="application/pdf,.pdf"
+              hidden
+            />
+
+
+            <div
+              id="upload-status"
+              class="inline-status"
+            ></div>
+
+          </div>
+
+
+          <!-- PAPERS -->
+          <div
+            id="papers-card"
+            class="card papers-card"
+          >
+
+            <div class="papers-header">
+
+              <h2>
+                My Papers
+              </h2>
+
+              <span
+                id="paper-count"
+                class="count-badge"
+              >
+                0
+              </span>
+
+            </div>
+
+
+            <label class="paper-filter">
+
+              <span>
+                ⌕
+              </span>
+
+              <input
+                id="paper-filter-input"
+                type="search"
+                placeholder="Search papers..."
+              />
+
+            </label>
+
+
+            <div
+              id="paper-list"
+              class="paper-list"
+            >
+
+              <div class="empty-state">
+                No papers loaded yet.
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- RIGHT COLUMN -->
+        <section class="right-column">
+
+
+          <!-- MODE TABS -->
+          <div class="mode-tabs">
+
+
+            <button
+              class="mode-tab"
+              data-mode="ask"
+            >
+
+              <span class="mode-icon">
+                ◌
+              </span>
+
+              <span>
+
+                <strong>
+                  Ask
+                </strong>
+
+                <small>
+                  Get answers from your papers
+                </small>
+
+              </span>
+
+            </button>
+
+
+            <button
+              class="mode-tab"
+              data-mode="verify"
+            >
+
+              <span class="mode-icon">
+                ◇
+              </span>
+
+              <span>
+
+                <strong>
+                  Verify
+                </strong>
+
+                <small>
+                  Check claims with evidence
+                </small>
+
+              </span>
+
+            </button>
+
+
+            <button
+              class="mode-tab active"
+              data-mode="explore"
+            >
+
+              <span class="mode-icon">
+                ✧
+              </span>
+
+              <span>
+
+                <strong>
+                  Explore
+                </strong>
+
+                <small>
+                  Compare, contrast, and discover
+                </small>
+
+              </span>
+
+            </button>
+
+          </div>
+
+
+          <!-- MAIN ANALYSIS CARD -->
+          <section class="analysis-card">
+
+
+            <div class="analysis-heading">
+
+              <div class="mode-bubble">
+                ✧
+              </div>
+
+              <div>
+
+                <h2 id="analysis-title">
+                  Explore Your Papers
+                </h2>
+
+                <p id="analysis-subtitle">
+                  Ask comparative questions and discover how papers agree or differ.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <!-- EXPLORE HINT -->
+            <div
+              id="selection-hint"
+              class="selection-hint"
+            >
+              Select at least two papers on the left for Explore.
+            </div>
+
+
+            <!-- SEARCH SCOPE -->
+            <div
+              id="scope-control"
+              class="scope-control hidden"
+            >
+
+              <span class="scope-label">
+                Search scope
+              </span>
+
+
+              <label class="scope-option">
+
+                <input
+                  type="radio"
+                  name="search-scope"
+                  value="all"
+                  checked
+                />
+
+                <span>
+                  All papers
+                </span>
+
+              </label>
+
+
+              <label class="scope-option">
+
+                <input
+                  type="radio"
+                  name="search-scope"
+                  value="selected"
+                />
+
+                <span>
+                  Selected papers
+                </span>
+
+              </label>
+
+            </div>
+
+
+            <!-- QUERY BOX -->
+            <div class="query-box">
+
+
+              <textarea
+                id="query-input"
+                rows="5"
+              ></textarea>
+
+
+              <div class="query-actions">
+
+
+                <div class="top-k-control">
+
+                  <label
+                    id="top-k-label"
+                    for="top-k"
+                  >
+                    Evidence per paper
+                  </label>
+
+
+                  <select id="top-k">
+
+                    <option value="2">
+                      2
+                    </option>
+
+                    <option
+                      value="3"
+                      selected
+                    >
+                      3
+                    </option>
+
+                    <option value="5">
+                      5
+                    </option>
+
+                  </select>
+
+                </div>
+
+
+                <button
+                  id="run-btn"
+                  class="primary-btn"
+                >
+
+                  <span id="run-label">
+                    Run Analysis
+                  </span>
+
+                  <span>
+                    →
+                  </span>
+
+                </button>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- EXPLORE RESULTS -->
+          <section
+            id="result-shell"
+            class="result-shell hidden"
+          >
+
+
+            <div class="result-tabs">
+
+
+              <button
+                class="result-tab active"
+                data-result-panel="summary-panel"
+              >
+
+                <span>
+                  ▧
+                </span>
+
+                <span>
+
+                  <strong>
+                    Summary
+                  </strong>
+
+                  <small>
+                    High-level answer
+                  </small>
+
+                </span>
+
+              </button>
+
+
+              <button
+                class="result-tab"
+                data-result-panel="documents-panel"
+              >
+
+                <span>
+                  ▤
+                </span>
+
+                <span>
+
+                  <strong>
+                    By Document
+                  </strong>
+
+                  <small>
+                    Individual findings
+                  </small>
+
+                </span>
+
+              </button>
+
+
+              <button
+                class="result-tab"
+                data-result-panel="differences-panel"
+              >
+
+                <span>
+                  ⚖
+                </span>
+
+                <span>
+
+                  <strong>
+                    Differences
+                  </strong>
+
+                  <small>
+                    Contrasts and conflicts
+                  </small>
+
+                </span>
+
+              </button>
+
+            </div>
+
+
+            <!-- SUMMARY -->
+            <div
+              id="summary-panel"
+              class="result-panel active"
+            >
+
+              <div class="section-title">
+
+                <span class="soft-icon">
+                  ▧
+                </span>
+
+                <h3>
+                  Summary
+                </h3>
+
+              </div>
+
+
+              <div
+                id="summary-content"
+                class="prose"
+              ></div>
+
+            </div>
+
+
+            <!-- BY DOCUMENT -->
+            <div
+              id="documents-panel"
+              class="result-panel"
+            >
+
+              <div class="section-title">
+
+                <span class="soft-icon">
+                  ▤
+                </span>
+
+                <h3>
+                  By Document
+                </h3>
+
+              </div>
+
+
+              <div
+                id="by-document-content"
+                class="document-findings"
+              ></div>
+
+            </div>
+
+
+            <!-- DIFFERENCES -->
+            <div
+              id="differences-panel"
+              class="result-panel"
+            >
+
+              <div class="section-title">
+
+                <span class="soft-icon">
+                  ⚖
+                </span>
+
+                <h3>
+                  Differences
+                </h3>
+
+              </div>
+
+
+              <div
+                id="differences-content"
+              ></div>
+
+            </div>
+
+
+            <!-- EVIDENCE -->
+            <div class="evidence-section">
+
+              <div class="section-title evidence-title-row">
+
+                <div>
+
+                  <span class="soft-icon">
+                    ↗
+                  </span>
+
+                  <h3>
+                    Evidence
+                  </h3>
+
+                </div>
+
+
+                <span class="helper-text">
+                  Traceable passages from your papers
+                </span>
+
+              </div>
+
+
+              <div
+                id="evidence-chips"
+                class="evidence-chips"
+              ></div>
+
+            </div>
+
+          </section>
+
+
+          <!-- ASK / VERIFY RESULT -->
+          <section
+            id="single-result-shell"
+            class="single-result-shell hidden"
+          >
+
+
+            <div class="section-title">
+
+              <span class="soft-icon">
+                ▧
+              </span>
+
+              <h3 id="single-result-title">
+                Answer
+              </h3>
+
+            </div>
+
+
+            <div
+              id="single-result-main"
+              class="single-result-main"
+            ></div>
+
+
+            <div
+              id="single-result-meta"
+              class="single-result-meta"
+            ></div>
+
+
+            <div class="evidence-section">
+
+
+              <div class="section-title">
+
+                <span class="soft-icon">
+                  ↗
+                </span>
+
+                <h3>
+                  Evidence
+                </h3>
+
+              </div>
+
+
+              <div
+                id="single-evidence-list"
+                class="single-evidence-list"
+              ></div>
+
+            </div>
+
+          </section>
+
+
+          <div
+            id="global-status"
+            class="global-status hidden"
+          ></div>
+
+        </section>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

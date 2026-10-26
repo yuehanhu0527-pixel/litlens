@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+python-multipart
+pydantic
+pymupdf
+sentence-transformers
+numpy
+python-dotenv
+
+sqlalchemy
+psycopg[binary]
+pgvector
+
+openai
+
+langgraph
+langchain-core
