@@ -5,6 +5,7 @@ pydantic
 pymupdf
 sentence-transformers
 numpy
+rank-bm25
 python-dotenv
 
 sqlalchemy
